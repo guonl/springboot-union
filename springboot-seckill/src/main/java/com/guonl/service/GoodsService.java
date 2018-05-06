@@ -10,5 +10,9 @@ import java.util.List;
  * Description:
  */
 public interface GoodsService {
+
     List<Goods> getGoodsList();
+
+    Goods getGoodById(Integer goodsId);
 }
+

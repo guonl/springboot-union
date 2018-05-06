@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by guonl
@@ -28,7 +27,7 @@ public class TestController {
     @ApiOperation(value = "测试接口")
     @RequestMapping(value = "/goods",method = RequestMethod.GET)
     public String goods(Model model){
-        return "goods/goods";
+        return "list";
     }
 
 }

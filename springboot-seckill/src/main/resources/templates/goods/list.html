@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>商品列表页面</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" type="text/css"></link>
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <h2>秒杀列表</h2>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>名称</td>
+                    <td>库存</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情页</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="sk : ${list}">
+                        <td th:text="${sk.name}" ></td>
+                        <td th:text="${sk.store}"></td>
+                        <td><span th:if="${null eq sk.startTime}"></span> <span
+                                th:unless="${sk.startTime eq null}"
+                                th:text="${#calendars.format(sk.startTime,'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </td>
+                        <td><span th:if="${null eq sk.endTime}"></span> <span
+                                th:unless="${sk.endTime eq null}"
+                                th:text="${#calendars.format(sk.endTime,'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </td>
+                        <td>
+                            <!--<a class="btn btn-info" href="/miaosha/p/${sk.id}/detail" 　target="_blank">详情</a>-->
+                            <a href="details.html" th:href="@{/goods/detail(goodsId=${sk.id})}">详情</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</html>

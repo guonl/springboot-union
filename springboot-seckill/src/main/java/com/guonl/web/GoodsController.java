@@ -6,9 +6,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -25,12 +25,21 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @ApiOperation(value = "获取商品列表")
-    @ResponseBody //一旦是用了这个注解，thymeleaf就找不到页面，直接返回字符串
-    @RequestMapping(value = "/getList",method = RequestMethod.GET,
+//    @ResponseBody //一旦是用了这个注解，thymeleaf就找不到页面，直接返回字符串
+    @RequestMapping(value = "/getList", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
-    public List getGoodsList(){
+    public String getGoodsList(Model model) {
         List<Goods> list = goodsService.getGoodsList();
-        return list;
+        model.addAttribute("list", list);
+        return "goods/list";
+    }
+
+    @ApiOperation(value = "获取商品详情")
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public String getGoodsList(Model model,@RequestParam Integer goodsId) {
+        Goods goods = goodsService.getGoodById(goodsId);
+        model.addAttribute("goods", goods);
+        return "goods/details";
     }
 
 

@@ -14,6 +14,8 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource({"classpath:spring/application-*.xml"})
 public class SeckillApplication {
 
+    // springboot热加载：https://www.cnblogs.com/lspz/p/6832358.html
+
     public static void main(String[] args) {
         SpringApplication.run(SeckillApplication.class,args);
     }

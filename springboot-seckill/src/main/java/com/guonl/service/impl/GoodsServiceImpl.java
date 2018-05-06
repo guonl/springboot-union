@@ -26,4 +26,10 @@ public class GoodsServiceImpl implements GoodsService{
         List<Goods> list = goodsMapper.selectByExample(example);
         return list;
     }
+
+    @Override
+    public Goods getGoodById(Integer goodsId) {
+        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+        return goods;
+    }
 }
