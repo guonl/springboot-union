@@ -8,6 +8,7 @@
 	<modules>
 		<module>springboot-dubbo-consumer</module>
         <module>springboot-seckill</module>
+        <module>springboot-redis-mq</module>
     </modules>
 
 	<name>springboot-union</name>
