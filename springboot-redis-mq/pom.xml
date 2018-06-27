@@ -29,6 +29,11 @@
             <artifactId>mt-framework</artifactId>
             <version>0.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>wang.moshu</groupId>
+            <artifactId>smvc-framework</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 

@@ -5,14 +5,9 @@ import com.guonl.mq.RedisMessage;
 import com.guonl.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import wang.moshu.message.Message;
 import wang.moshu.message.MessageTrunk;
-
-import javax.annotation.Resource;
 
 /**
  * Created by guonl
@@ -39,6 +34,13 @@ public class TestController {
             messageTrunk.put(message1);
         }
         return message;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
+    public String user(@RequestParam(value = "mobile") String mobile){
+
+        return mobile;
     }
 
 

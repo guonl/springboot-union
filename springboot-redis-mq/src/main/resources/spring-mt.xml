@@ -43,6 +43,9 @@
 	</bean>
 
 	<!-- 开启注解扫描 -->
-	<!--<context:component-scan base-package="wang.moshu" />-->
+	<context:component-scan base-package="wang.moshu" />
+
+	<!-- spring工具类声明（smvc中使用该工具类获取spring对象） -->
+	<bean class="wang.moshu.smvc.framework.util.SpringBeanUtils" />
 
 </beans>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- 打开aop对@Aspectj的注解支持 ,相当于为注解提供解析功能 -->
+    <aop:aspectj-autoproxy/>
+
+    <!--<mvc:annotation-driven validator="validator"/>-->
+    <!--<bean id="validator"-->
+          <!--class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">-->
+        <!--<property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>-->
+        <!--<property name="validationMessageSource" ref="messageSource"/>-->
+    <!--</bean>-->
+
+
+    <!--<mvc:cors>-->
+        <!--<mvc:mapping path="/**" exposed-headers="x-auth-token"/>-->
+    <!--</mvc:cors>-->
+
+    <!-- 拦截器处理 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 用户拦截器 -->
+            <mvc:mapping path="/test/**"/>
+            <!-- ================以下为不需要登录拦截的请求================= -->
+            <mvc:exclude-mapping path="/test/mq/{message}"/>
+
+            <bean class="com.guonl.intercept.MyUserInterceptor"/>
+        </mvc:interceptor>
+
+         <!--IP拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/test/mq/**"/>
+            <bean class="com.guonl.intercept.MyIPInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+</beans>
