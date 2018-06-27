@@ -6,9 +6,9 @@
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
-		<module>springboot-dubbo-consumer</module>
         <module>springboot-seckill</module>
         <module>springboot-redis-mq</module>
+        <module>springboot-dubbo</module>
     </modules>
 
 	<name>springboot-union</name>

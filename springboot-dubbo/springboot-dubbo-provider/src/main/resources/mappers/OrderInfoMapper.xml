@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guonl.dao.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.guonl.entity.OrderInfo" >
+    <constructor >
+      <idArg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="channels_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    order_id, order_sn, user_id, channels_id, order_name, order_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.guonl.entity.OrderInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_info
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.guonl.entity.OrderInfoExample" >
+    delete from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.guonl.entity.OrderInfo" >
+    insert into order_info (order_id, order_sn, user_id, 
+      channels_id, order_name, order_time
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{channelsId,jdbcType=INTEGER}, #{orderName,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.guonl.entity.OrderInfo" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="channelsId != null" >
+        channels_id,
+      </if>
+      <if test="orderName != null" >
+        order_name,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="channelsId != null" >
+        #{channelsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderName != null" >
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.guonl.entity.OrderInfoExample" resultType="java.lang.Integer" >
+    select count(*) from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_info
+    <set >
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelsId != null" >
+        channels_id = #{record.channelsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderName != null" >
+        order_name = #{record.orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTime != null" >
+        order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_info
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      channels_id = #{record.channelsId,jdbcType=INTEGER},
+      order_name = #{record.orderName,jdbcType=VARCHAR},
+      order_time = #{record.orderTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.guonl.entity.OrderInfo" >
+    update order_info
+    <set >
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="channelsId != null" >
+        channels_id = #{channelsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderName != null" >
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.guonl.entity.OrderInfo" >
+    update order_info
+    set order_sn = #{orderSn,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      channels_id = #{channelsId,jdbcType=INTEGER},
+      order_name = #{orderName,jdbcType=VARCHAR},
+      order_time = #{orderTime,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
