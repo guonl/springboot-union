@@ -9,7 +9,9 @@
         <module>springboot-seckill</module>
         <module>springboot-redis-mq</module>
         <module>springboot-dubbo</module>
-    </modules>
+        <module>springboot-zookeeper</module>
+		<module>springboot-concurrency</module>
+	</modules>
 
 	<name>springboot-union</name>
 	<description>The first Spring Boot project</description>
